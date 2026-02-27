@@ -13,6 +13,10 @@ public abstract class User {
         this.userName = userName;
     }
 
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+    
     public String getEmail() {
         return email;
     }
