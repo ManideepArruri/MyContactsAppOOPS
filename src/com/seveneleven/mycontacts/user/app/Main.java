@@ -1,7 +1,13 @@
+/* 
+ * Version : 4
+ * author : Developer
+ *  */
+
 package com.seveneleven.mycontacts.user.app;
 
 import java.util.Scanner;
 
+import com.seveneleven.mycontacts.contact.service.ContactService;
 import com.seveneleven.mycontacts.user.model.User;
 import com.seveneleven.mycontacts.user.service.*;
 
@@ -14,6 +20,7 @@ public class Main {
 		UserService userService = new UserService();
 		AuthService authService = new AuthService(userService);
 		ProfileService profileService = new ProfileService(authService);
+		ContactService contactService = new ContactService(authService);
 
 		while (true) {
 
@@ -24,7 +31,10 @@ public class Main {
 			System.out.println("4. View Profile");
 			System.out.println("5. Update Username");
 			System.out.println("6. Change Password");
-			System.out.println("7. Exit");
+			System.out.println("7. Add Contact");
+			System.out.println("8. View All Contacts");
+			System.out.println("9. View Contact By ID");
+			System.out.println("10. Exit");
 			System.out.print("Choose option: ");
 
 			int choice = scanner.nextInt();
@@ -88,10 +98,34 @@ public class Main {
 
 					profileService.changePassword(oldPass, newPass);
 					break;
+					
 
 				case 7:
-					System.out.println("Exiting...");
-					return;
+				    System.out.print("Name: ");
+				    String name = scanner.nextLine();
+
+				    System.out.print("Phone: ");
+				    String phone = scanner.nextLine();
+
+				    System.out.print("Email: ");
+				    String contactEmail = scanner.nextLine();
+
+				    contactService.addContact(name, phone, contactEmail);
+				    break;
+
+				case 8:
+				    contactService.viewAllContacts();
+				    break;
+
+				case 9:
+				    System.out.print("Enter Contact ID: ");
+				    String id = scanner.nextLine();
+				    contactService.viewContactById(id);
+				    break;
+
+				case 10:
+				    System.out.println("Exiting...");
+				    return;
 				default:
 					System.out.println("Invalid choice");
 				}
