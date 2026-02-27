@@ -1,5 +1,5 @@
 /* 
- * Version : 5
+ * Version : 6
  * author : Developer
  *  */
 
@@ -35,7 +35,8 @@ public class Main {
 			System.out.println("8. View All Contacts");
 			System.out.println("9. View Contact By ID");
 			System.out.println("10. View Contact With Format");
-			System.out.println("11. Exit");
+			System.out.println("11. Edit Contact");
+			System.out.println("12. Exit");
 			System.out.print("Choose option: ");
 
 			int choice = scanner.nextInt();
@@ -140,6 +141,24 @@ public class Main {
 				    contactService.viewContactWithFormat(contactId, format);
 				    break;
 				case 11:
+
+				    System.out.print("Enter Contact ID to edit: ");
+				    String editId = scanner.nextLine();
+
+				    System.out.println("Leave field blank if no change.");
+
+				    System.out.print("New Name: ");
+				    String newName2 = scanner.nextLine();
+
+				    System.out.print("New Phone: ");
+				    String newPhone = scanner.nextLine();
+
+				    System.out.print("New Email: ");
+				    String newEmail = scanner.nextLine();
+
+				    contactService.editContact(editId, newName2, newPhone, newEmail);
+				    break;
+				case 12:
 				    System.out.println("Exiting...");
 				    return;
 				default:

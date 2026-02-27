@@ -10,3 +10,6 @@ User adds a new contact with name, phone numbers, email addresses, and optional 
 
 For a Logged-in User
 User views complete information of a specific contact.
+
+For a Logged-in User
+User modifies existing contact information

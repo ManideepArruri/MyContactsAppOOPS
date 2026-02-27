@@ -38,6 +38,27 @@ public class Contact {
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
+    
+    public void setName(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Name cannot be empty");
+        }
+        this.name = name;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        if (phoneNumber == null || phoneNumber.trim().isEmpty()) {
+            throw new IllegalArgumentException("Phone number cannot be empty");
+        }
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setEmail(String email) {
+        if (email == null || !email.contains("@")) {
+            throw new IllegalArgumentException("Invalid email format");
+        }
+        this.email = email;
+    }
 
     // Normal display
     public String getNormalDetails() {
