@@ -39,12 +39,48 @@ public class Contact {
         return createdAt;
     }
 
-    @Override
-    public String toString() {
+    // Normal display
+    public String getNormalDetails() {
+        return formatDetails(name, phoneNumber, email);
+    }
+
+    // Uppercase display
+    public String getUpperCaseDetails() {
+        return formatDetails(
+                name.toUpperCase(),
+                phoneNumber.toUpperCase(),
+                email.toUpperCase()
+        );
+    }
+
+    // Masked email display
+    public String getMaskedEmailDetails() {
+        String masked = maskEmail(email);
+        return formatDetails(name, phoneNumber, masked);
+    }
+
+    private String formatDetails(String name,
+                                 String phone,
+                                 String email) {
+
         return "\nContact ID: " + contactId +
                "\nName: " + name +
-               "\nPhone: " + phoneNumber +
+               "\nPhone: " + phone +
                "\nEmail: " + email +
                "\nCreated At: " + createdAt;
+    }
+
+    private String maskEmail(String email) {
+
+        int atIndex = email.indexOf("@");
+
+        if (atIndex <= 2) {
+            return "****" + email.substring(atIndex);
+        }
+
+        String visible = email.substring(0, 2);
+        String domain = email.substring(atIndex);
+
+        return visible + "****" + domain;
     }
 }

@@ -1,5 +1,5 @@
 /* 
- * Version : 4
+ * Version : 5
  * author : Developer
  *  */
 
@@ -34,7 +34,8 @@ public class Main {
 			System.out.println("7. Add Contact");
 			System.out.println("8. View All Contacts");
 			System.out.println("9. View Contact By ID");
-			System.out.println("10. Exit");
+			System.out.println("10. View Contact With Format");
+			System.out.println("11. Exit");
 			System.out.print("Choose option: ");
 
 			int choice = scanner.nextInt();
@@ -124,6 +125,21 @@ public class Main {
 				    break;
 
 				case 10:
+
+				    System.out.print("Enter Contact ID: ");
+				    String contactId = scanner.nextLine();
+
+				    System.out.println("Choose Format:");
+				    System.out.println("1. Normal");
+				    System.out.println("2. Uppercase");
+				    System.out.println("3. Masked Email");
+
+				    int format = scanner.nextInt();
+				    scanner.nextLine();
+
+				    contactService.viewContactWithFormat(contactId, format);
+				    break;
+				case 11:
 				    System.out.println("Exiting...");
 				    return;
 				default:

@@ -77,4 +77,40 @@ public class ContactService {
 
         System.out.println(contacts.get(contactId));
     }
+    
+    public void viewContactWithFormat(String contactId, int formatOption) {
+
+        User user = authService.getLoggedInUser();
+
+        if (user == null) {
+            throw new IllegalStateException("Please login first");
+        }
+
+        Map<String, Contact> contacts = userContacts.get(user.getEmail());
+
+        if (contacts == null || !contacts.containsKey(contactId)) {
+            System.out.println("Contact not found.");
+            return;
+        }
+
+        Contact contact = contacts.get(contactId);
+
+        switch (formatOption) {
+
+            case 1:
+                System.out.println(contact.getNormalDetails());
+                break;
+
+            case 2:
+                System.out.println(contact.getUpperCaseDetails());
+                break;
+
+            case 3:
+                System.out.println(contact.getMaskedEmailDetails());
+                break;
+
+            default:
+                System.out.println("Invalid format option");
+        }
+    }
 }
