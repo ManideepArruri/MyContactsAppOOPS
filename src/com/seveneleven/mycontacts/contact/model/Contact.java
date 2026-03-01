@@ -10,6 +10,7 @@ public class Contact {
     private String phoneNumber;
     private String email;
     private LocalDateTime createdAt;
+    private boolean deleted = false;
 
     public Contact(String name, String phoneNumber, String email) {
         this.contactId = UUID.randomUUID().toString();
@@ -88,7 +89,8 @@ public class Contact {
                "\nName: " + name +
                "\nPhone: " + phone +
                "\nEmail: " + email +
-               "\nCreated At: " + createdAt;
+               "\nCreated At: " + createdAt +
+               "\nStatus: " + (deleted ? "Deleted" : "Active");
     }
 
     private String maskEmail(String email) {
@@ -103,5 +105,13 @@ public class Contact {
         String domain = email.substring(atIndex);
 
         return visible + "****" + domain;
+    }
+    
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

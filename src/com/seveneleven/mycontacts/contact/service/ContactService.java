@@ -54,8 +54,10 @@ public class ContactService {
 		}
 
 		for (Contact contact : contacts.values()) {
-			System.out.println(contact);
-			System.out.println("----------------------");
+		    if (!contact.isDeleted()) {
+		        System.out.println(contact);
+		        System.out.println("----------------------");
+		    }
 		}
 	}
 
@@ -147,5 +149,52 @@ public class ContactService {
 		}
 
 		System.out.println("Contact updated successfully!");
+	}
+	
+	public void softDeleteContact(String contactId) {
+
+	    User user = authService.getLoggedInUser();
+
+	    if (user == null) {
+	        throw new IllegalStateException("Please login first");
+	    }
+
+	    Map<String, Contact> contacts = userContacts.get(user.getEmail());
+
+	    if (contacts == null || !contacts.containsKey(contactId)) {
+	        System.out.println("Contact not found.");
+	        return;
+	    }
+
+	    Contact contact = contacts.get(contactId);
+
+	    if (contact.isDeleted()) {
+	        System.out.println("Contact already deleted.");
+	        return;
+	    }
+
+	    contact.setDeleted(true);
+
+	    System.out.println("Contact soft deleted successfully.");
+	}
+	
+	public void hardDeleteContact(String contactId) {
+
+	    User user = authService.getLoggedInUser();
+
+	    if (user == null) {
+	        throw new IllegalStateException("Please login first");
+	    }
+
+	    Map<String, Contact> contacts = userContacts.get(user.getEmail());
+
+	    if (contacts == null || !contacts.containsKey(contactId)) {
+	        System.out.println("Contact not found.");
+	        return;
+	    }
+
+	    contacts.remove(contactId);
+
+	    System.out.println("Contact permanently deleted.");
 	}
 }

@@ -1,5 +1,5 @@
 /* 
- * Version : 6
+ * Version : 7
  * author : Developer
  *  */
 
@@ -36,7 +36,9 @@ public class Main {
 			System.out.println("9. View Contact By ID");
 			System.out.println("10. View Contact With Format");
 			System.out.println("11. Edit Contact");
-			System.out.println("12. Exit");
+			System.out.println("12. Soft Delete Contact");
+			System.out.println("13. Hard Delete Contact");
+			System.out.println("14. Exit");
 			System.out.print("Choose option: ");
 
 			int choice = scanner.nextInt();
@@ -100,67 +102,82 @@ public class Main {
 
 					profileService.changePassword(oldPass, newPass);
 					break;
-					
+
 
 				case 7:
-				    System.out.print("Name: ");
-				    String name = scanner.nextLine();
+					System.out.print("Name: ");
+					String name = scanner.nextLine();
 
-				    System.out.print("Phone: ");
-				    String phone = scanner.nextLine();
+					System.out.print("Phone: ");
+					String phone = scanner.nextLine();
 
-				    System.out.print("Email: ");
-				    String contactEmail = scanner.nextLine();
+					System.out.print("Email: ");
+					String contactEmail = scanner.nextLine();
 
-				    contactService.addContact(name, phone, contactEmail);
-				    break;
+					contactService.addContact(name, phone, contactEmail);
+					break;
 
 				case 8:
-				    contactService.viewAllContacts();
-				    break;
+					contactService.viewAllContacts();
+					break;
 
 				case 9:
-				    System.out.print("Enter Contact ID: ");
-				    String id = scanner.nextLine();
-				    contactService.viewContactById(id);
-				    break;
+					System.out.print("Enter Contact ID: ");
+					String id = scanner.nextLine();
+					contactService.viewContactById(id);
+					break;
 
 				case 10:
 
-				    System.out.print("Enter Contact ID: ");
-				    String contactId = scanner.nextLine();
+					System.out.print("Enter Contact ID: ");
+					String contactId = scanner.nextLine();
 
-				    System.out.println("Choose Format:");
-				    System.out.println("1. Normal");
-				    System.out.println("2. Uppercase");
-				    System.out.println("3. Masked Email");
+					System.out.println("Choose Format:");
+					System.out.println("1. Normal");
+					System.out.println("2. Uppercase");
+					System.out.println("3. Masked Email");
 
-				    int format = scanner.nextInt();
-				    scanner.nextLine();
+					int format = scanner.nextInt();
+					scanner.nextLine();
 
-				    contactService.viewContactWithFormat(contactId, format);
-				    break;
+					contactService.viewContactWithFormat(contactId, format);
+					break;
 				case 11:
 
-				    System.out.print("Enter Contact ID to edit: ");
-				    String editId = scanner.nextLine();
+					System.out.print("Enter Contact ID to edit: ");
+					String editId = scanner.nextLine();
 
-				    System.out.println("Leave field blank if no change.");
+					System.out.println("Leave field blank if no change.");
 
-				    System.out.print("New Name: ");
-				    String newName2 = scanner.nextLine();
+					System.out.print("New Name: ");
+					String newName2 = scanner.nextLine();
 
-				    System.out.print("New Phone: ");
-				    String newPhone = scanner.nextLine();
+					System.out.print("New Phone: ");
+					String newPhone = scanner.nextLine();
 
-				    System.out.print("New Email: ");
-				    String newEmail = scanner.nextLine();
+					System.out.print("New Email: ");
+					String newEmail = scanner.nextLine();
 
-				    contactService.editContact(editId, newName2, newPhone, newEmail);
-				    break;
+					contactService.editContact(editId, newName2, newPhone, newEmail);
+					break;
 				case 12:
-				    System.out.println("Exiting...");
-				    return;
+
+					System.out.print("Enter Contact ID to soft delete: ");
+					String softId = scanner.nextLine();
+
+					contactService.softDeleteContact(softId);
+					break;
+
+				case 13:
+
+					System.out.print("Enter Contact ID to hard delete: ");
+					String hardId = scanner.nextLine();
+
+					contactService.hardDeleteContact(hardId);
+					break;
+				case 14:
+					System.out.println("Exiting...");
+					return;
 				default:
 					System.out.println("Invalid choice");
 				}

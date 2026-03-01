@@ -13,3 +13,7 @@ User views complete information of a specific contact.
 
 For a Logged-in User
 User modifies existing contact information
+
+For Logged-in User
+User removes a contact from their list with confirmation.
+
