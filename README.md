@@ -17,3 +17,6 @@ User modifies existing contact information
 For Logged-in User
 User removes a contact from their list with confirmation.
 
+For Logged-in User
+User performs operations on multiple contacts (delete, tag, export).
+

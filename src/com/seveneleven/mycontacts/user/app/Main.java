@@ -1,12 +1,15 @@
 /* 
- * Version : 7
+ * Version : 8
  * author : Developer
  *  */
 
 package com.seveneleven.mycontacts.user.app;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
+import com.seveneleven.mycontacts.contact.service.BulkContactService;
 import com.seveneleven.mycontacts.contact.service.ContactService;
 import com.seveneleven.mycontacts.user.model.User;
 import com.seveneleven.mycontacts.user.service.*;
@@ -21,6 +24,8 @@ public class Main {
 		AuthService authService = new AuthService(userService);
 		ProfileService profileService = new ProfileService(authService);
 		ContactService contactService = new ContactService(authService);
+		BulkContactService bulkService =
+		    new BulkContactService(authService, contactService.getUserContacts());
 
 		while (true) {
 
@@ -38,7 +43,11 @@ public class Main {
 			System.out.println("11. Edit Contact");
 			System.out.println("12. Soft Delete Contact");
 			System.out.println("13. Hard Delete Contact");
-			System.out.println("14. Exit");
+			System.out.println("14. Bulk Soft Delete");
+			System.out.println("15. Bulk Hard Delete");
+			System.out.println("16. Bulk Add Tag");
+			System.out.println("17. Bulk Export");
+			System.out.println("18. Exit");
 			System.out.print("Choose option: ");
 
 			int choice = scanner.nextInt();
@@ -175,7 +184,76 @@ public class Main {
 
 					contactService.hardDeleteContact(hardId);
 					break;
+					
 				case 14:
+
+				    System.out.println("Enter Contact IDs separated by comma:");
+				    String softInput = scanner.nextLine();
+
+				    String[] softArray = softInput.split(",");
+				    List<String> softIds = new ArrayList<>();
+
+				    for (String id1 : softArray) {
+				        softIds.add(id1.trim());
+				    }
+
+				    bulkService.bulkSoftDelete(softIds);
+				    break;
+
+
+				case 15:
+
+				    System.out.println("Enter Contact IDs separated by comma:");
+				    String hardInput = scanner.nextLine();
+
+				    String[] hardArray = hardInput.split(",");
+				    List<String> hardIds = new ArrayList<>();
+
+				    for (String id1 : hardArray) {
+				        hardIds.add(id1.trim());
+				    }
+
+				    bulkService.bulkHardDelete(hardIds);
+				    break;
+
+
+				case 16:
+
+				    System.out.println("Enter Contact IDs separated by comma:");
+				    String tagInput = scanner.nextLine();
+
+				    String[] tagArray = tagInput.split(",");
+				    List<String> tagIds = new ArrayList<>();
+
+				    for (String id1 : tagArray) {
+				        tagIds.add(id1.trim());
+				    }
+
+				    System.out.print("Enter tag to add: ");
+				    String tag = scanner.nextLine();
+
+				    bulkService.bulkAddTag(tagIds, tag);
+				    break;
+
+
+				case 17:
+
+				    System.out.println("Enter Contact IDs separated by comma:");
+				    String exportInput = scanner.nextLine();
+
+				    String[] exportArray = exportInput.split(",");
+				    List<String> exportIds = new ArrayList<>();
+
+				    for (String id1 : exportArray) {
+				        exportIds.add(id1.trim());
+				    }
+
+				    System.out.print("Enter file name (example: contacts.txt): ");
+				    String fileName = scanner.nextLine();
+
+				    bulkService.bulkExport(exportIds, fileName);
+				    break;
+				case 18:
 					System.out.println("Exiting...");
 					return;
 				default:

@@ -1,6 +1,8 @@
 package com.seveneleven.mycontacts.contact.model;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 public class Contact {
@@ -11,6 +13,7 @@ public class Contact {
     private String email;
     private LocalDateTime createdAt;
     private boolean deleted = false;
+    private Set<String> tags = new HashSet<>();
 
     public Contact(String name, String phoneNumber, String email) {
         this.contactId = UUID.randomUUID().toString();
@@ -90,7 +93,8 @@ public class Contact {
                "\nPhone: " + phone +
                "\nEmail: " + email +
                "\nCreated At: " + createdAt +
-               "\nStatus: " + (deleted ? "Deleted" : "Active");
+               "\nStatus: " + (deleted ? "Deleted" : "Active") + 
+               "\nTags: " + tags;
     }
 
     private String maskEmail(String email) {
@@ -113,5 +117,15 @@ public class Contact {
 
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
+    }
+    
+    public void addTag(String tag) {
+        if (tag != null && !tag.trim().isEmpty()) {
+            tags.add(tag);
+        }
+    }
+
+    public Set<String> getTags() {
+        return tags;
     }
 }

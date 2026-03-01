@@ -197,4 +197,8 @@ public class ContactService {
 
 	    System.out.println("Contact permanently deleted.");
 	}
+	
+	public Map<String, Map<String, Contact>> getUserContacts() {
+	    return userContacts;
+	}
 }
