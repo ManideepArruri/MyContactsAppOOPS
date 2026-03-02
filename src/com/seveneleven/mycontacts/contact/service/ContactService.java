@@ -435,4 +435,80 @@ public class ContactService {
 	    System.out.println("Tag assigned to contact.");
 	}
 	
+	public void applyTagToContact(String contactId, String tagName) {
+
+	    User user = authService.getLoggedInUser();
+
+	    if (user == null) {
+	        throw new IllegalStateException("Login required");
+	    }
+
+	    Map<String, Contact> contacts = userContacts.get(user.getEmail());
+
+	    if (contacts == null || !contacts.containsKey(contactId)) {
+	        System.out.println("Contact not found.");
+	        return;
+	    }
+
+	    Tag tag = new Tag(tagName);
+
+	    contacts.get(contactId).addTag(tag);
+
+	    System.out.println("Tag applied successfully.");
+	}
+	
+	public void applyMultipleTags(String contactId, String tagInput) {
+
+	    User user = authService.getLoggedInUser();
+
+	    if (user == null) {
+	        throw new IllegalStateException("Login required");
+	    }
+
+	    Map<String, Contact> contacts = userContacts.get(user.getEmail());
+
+	    if (contacts == null || !contacts.containsKey(contactId)) {
+	        System.out.println("Contact not found.");
+	        return;
+	    }
+
+	    Contact contact = contacts.get(contactId);
+
+	    String[] tagArray = tagInput.split(",");
+
+	    for (String tagName : tagArray) {
+	        Tag tag = new Tag(tagName.trim());
+	        contact.addTag(tag);
+	    }
+
+	    System.out.println("Multiple tags applied successfully.");
+	}
+	
+	public void removeTagFromContact(String contactId, String tagName) {
+
+	    User user = authService.getLoggedInUser();
+
+	    if (user == null) {
+	        throw new IllegalStateException("Login required");
+	    }
+
+	    Map<String, Contact> contacts = userContacts.get(user.getEmail());
+
+	    if (contacts == null || !contacts.containsKey(contactId)) {
+	        System.out.println("Contact not found.");
+	        return;
+	    }
+
+	    Contact contact = contacts.get(contactId);
+
+	    Tag tag = new Tag(tagName);
+
+	    if (contact.getTags().contains(tag)) {
+	        contact.removeTag(tag);
+	        System.out.println("Tag removed successfully.");
+	    } else {
+	        System.out.println("Tag not found for this contact.");
+	    }
+	}
+	
 }

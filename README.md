@@ -28,3 +28,6 @@ For Logged-in User
 
 For Logged-in User
 User creates custom tags (Family, Work, Friends) for organizing contacts.
+
+For Logged in User
+User assigns one or multiple tags to contacts.

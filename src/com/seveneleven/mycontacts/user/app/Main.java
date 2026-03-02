@@ -60,7 +60,10 @@ public class Main {
 			System.out.println("25. Create Tag");
 			System.out.println("26. View Tags");
 			System.out.println("27. Assign Tag To Contact");
-			System.out.println("28. Exit");
+			System.out.println("28. Apply Single Tag to Contact");
+			System.out.println("29. Apply Multiple Tags to Contact");
+			System.out.println("30. Remove Tag from Contact");
+			System.out.println("31. Exit");
 			System.out.print("Choose option: ");
 
 			int choice = scanner.nextInt();
@@ -331,6 +334,40 @@ public class Main {
 				    contactService.assignTagToContact(contactId1, tag1);
 				    break;
 				case 28:
+
+				    System.out.print("Enter Contact ID: ");
+				    String contactId11 = scanner.nextLine();
+
+				    System.out.print("Enter Tag name: ");
+				    String tagName1 = scanner.nextLine();
+
+				    contactService.applyTagToContact(contactId11, tagName1);
+				    break;
+
+
+				case 29:
+
+				    System.out.print("Enter Contact ID: ");
+				    String contactId2 = scanner.nextLine();
+
+				    System.out.print("Enter tags separated by comma: ");
+				    String tagInput1 = scanner.nextLine();
+
+				    contactService.applyMultipleTags(contactId2, tagInput1);
+				    break;
+
+
+				case 30:
+
+				    System.out.print("Enter Contact ID: ");
+				    String contactId3 = scanner.nextLine();
+
+				    System.out.print("Enter Tag name to remove: ");
+				    String removeTag = scanner.nextLine();
+
+				    contactService.removeTagFromContact(contactId3, removeTag);
+				    break;
+				case 31:
 					System.out.println("Exiting...");
 					return;
 				default:
