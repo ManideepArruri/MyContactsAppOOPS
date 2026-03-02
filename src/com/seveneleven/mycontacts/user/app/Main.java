@@ -47,7 +47,11 @@ public class Main {
 			System.out.println("15. Bulk Hard Delete");
 			System.out.println("16. Bulk Add Tag");
 			System.out.println("17. Bulk Export");
-			System.out.println("18. Exit");
+			System.out.println("18. Search By Name");
+			System.out.println("19. Search By Phone");
+			System.out.println("20. Search By Email");
+			System.out.println("21. Search By Tag");
+			System.out.println("22. Exit");
 			System.out.print("Choose option: ");
 
 			int choice = scanner.nextInt();
@@ -254,6 +258,33 @@ public class Main {
 				    bulkService.bulkExport(exportIds, fileName);
 				    break;
 				case 18:
+
+				    System.out.print("Enter name to search: ");
+				    String nameSearch = scanner.nextLine();
+				    contactService.searchByName(nameSearch);
+				    break;
+
+				case 19:
+
+				    System.out.print("Enter phone to search: ");
+				    String phoneSearch = scanner.nextLine();
+				    contactService.searchByPhone(phoneSearch);
+				    break;
+
+				case 20:
+
+				    System.out.print("Enter email to search: ");
+				    String emailSearch = scanner.nextLine();
+				    contactService.searchByEmail(emailSearch);
+				    break;
+
+				case 21:
+
+				    System.out.print("Enter tag to search: ");
+				    String tagSearch = scanner.nextLine();
+				    contactService.searchByTag(tagSearch);
+				    break;
+				case 22:
 					System.out.println("Exiting...");
 					return;
 				default:

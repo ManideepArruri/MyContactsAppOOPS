@@ -20,3 +20,6 @@ User removes a contact from their list with confirmation.
 For Logged-in User
 User performs operations on multiple contacts (delete, tag, export).
 
+For Logged-in User
+ User searches contacts by name, phone, email, or tags.
+

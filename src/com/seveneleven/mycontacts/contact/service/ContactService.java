@@ -201,4 +201,120 @@ public class ContactService {
 	public Map<String, Map<String, Contact>> getUserContacts() {
 	    return userContacts;
 	}
+	
+	public void searchByName(String searchName) {
+
+	    User user = authService.getLoggedInUser();
+
+	    if (user == null) {
+	        throw new IllegalStateException("Please login first");
+	    }
+
+	    Map<String, Contact> contacts = userContacts.get(user.getEmail());
+
+	    if (contacts == null || contacts.isEmpty()) {
+	        System.out.println("No contacts found.");
+	        return;
+	    }
+
+	    boolean found = false;
+
+	    for (Contact contact : contacts.values()) {
+
+	        if (!contact.isDeleted() &&
+	            contact.getName().toLowerCase()
+	                    .contains(searchName.toLowerCase())) {
+
+	            System.out.println(contact);
+	            System.out.println("-------------------");
+	            found = true;
+	        }
+	    }
+
+	    if (!found) {
+	        System.out.println("No matching contacts found.");
+	    }
+	}
+	
+	public void searchByPhone(String phone) {
+
+	    User user = authService.getLoggedInUser();
+	    if (user == null) {
+	        throw new IllegalStateException("Please login first");
+	    }
+
+	    Map<String, Contact> contacts = userContacts.get(user.getEmail());
+
+	    boolean found = false;
+
+	    for (Contact contact : contacts.values()) {
+
+	        if (!contact.isDeleted() &&
+	            contact.getPhoneNumber().contains(phone)) {
+
+	            System.out.println(contact);
+	            System.out.println("-------------------");
+	            found = true;
+	        }
+	    }
+
+	    if (!found) {
+	        System.out.println("No matching contacts found.");
+	    }
+	}
+	
+	public void searchByEmail(String email) {
+
+	    User user = authService.getLoggedInUser();
+	    if (user == null) {
+	        throw new IllegalStateException("Please login first");
+	    }
+
+	    Map<String, Contact> contacts = userContacts.get(user.getEmail());
+
+	    boolean found = false;
+
+	    for (Contact contact : contacts.values()) {
+
+	        if (!contact.isDeleted() &&
+	            contact.getEmail().equalsIgnoreCase(email)) {
+
+	            System.out.println(contact);
+	            System.out.println("-------------------");
+	            found = true;
+	        }
+	    }
+
+	    if (!found) {
+	        System.out.println("No matching contacts found.");
+	    }
+	}
+	
+	public void searchByTag(String tag) {
+
+	    User user = authService.getLoggedInUser();
+	    if (user == null) {
+	        throw new IllegalStateException("Please login first");
+	    }
+
+	    Map<String, Contact> contacts = userContacts.get(user.getEmail());
+
+	    boolean found = false;
+
+	    for (Contact contact : contacts.values()) {
+
+	        if (!contact.isDeleted() &&
+	            contact.getTags().contains(tag)) {
+
+	            System.out.println(contact);
+	            System.out.println("-------------------");
+	            found = true;
+	        }
+	    }
+
+	    if (!found) {
+	        System.out.println("No matching contacts found.");
+	    }
+	}
+	
 }
