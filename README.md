@@ -23,3 +23,8 @@ User performs operations on multiple contacts (delete, tag, export).
 For Logged-in User
  User searches contacts by name, phone, email, or tags.
 
+For Logged-in User
+ User applies multiple filters (by tag, date added, frequently contacted).
+
+
+

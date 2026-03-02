@@ -2,6 +2,10 @@ package com.seveneleven.mycontacts.contact.service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import com.seveneleven.mycontacts.contact.model.Contact;
 import com.seveneleven.mycontacts.user.model.User;
@@ -314,6 +318,100 @@ public class ContactService {
 
 	    if (!found) {
 	        System.out.println("No matching contacts found.");
+	    }
+	}
+	
+	public void filterByTag(String tag) {
+
+	    User user = authService.getLoggedInUser();
+	    if (user == null) {
+	        throw new IllegalStateException("Login required");
+	    }
+
+	    Map<String, Contact> contactsMap = userContacts.get(user.getEmail());
+
+	    if (contactsMap == null) {
+	        System.out.println("No contacts found.");
+	        return;
+	    }
+
+	    for (Contact contact : contactsMap.values()) {
+
+	        if (!contact.isDeleted() &&
+	            contact.getTags().contains(tag)) {
+
+	            System.out.println(contact);
+	            System.out.println("-------------------");
+	        }
+	    }
+	}
+	public void filterByDateAdded() {
+
+	    User user = authService.getLoggedInUser();
+	    if (user == null) {
+	        throw new IllegalStateException("Login required");
+	    }
+
+	    Map<String, Contact> contactsMap = userContacts.get(user.getEmail());
+
+	    if (contactsMap == null) {
+	        System.out.println("No contacts found.");
+	        return;
+	    }
+
+	    List<Contact> contactsList = new ArrayList<>();
+
+	    for (Contact contact : contactsMap.values()) {
+	        if (!contact.isDeleted()) {
+	            contactsList.add(contact);
+	        }
+	    }
+
+	    Collections.sort(contactsList, new Comparator<Contact>() {
+	        @Override
+	        public int compare(Contact c1, Contact c2) {
+	            return c2.getCreatedAt().compareTo(c1.getCreatedAt());
+	        }
+	    });
+
+	    for (Contact contact : contactsList) {
+	        System.out.println(contact);
+	        System.out.println("-------------------");
+	    }
+	}
+	
+	public void filterByFrequentlyContacted() {
+
+	    User user = authService.getLoggedInUser();
+	    if (user == null) {
+	        throw new IllegalStateException("Login required");
+	    }
+
+	    Map<String, Contact> contactsMap = userContacts.get(user.getEmail());
+
+	    if (contactsMap == null) {
+	        System.out.println("No contacts found.");
+	        return;
+	    }
+
+	    List<Contact> contactsList = new ArrayList<>();
+
+	    for (Contact contact : contactsMap.values()) {
+	        if (!contact.isDeleted()) {
+	            contactsList.add(contact);
+	        }
+	    }
+
+	    Collections.sort(contactsList, new Comparator<Contact>() {
+	        @Override
+	        public int compare(Contact c1, Contact c2) {
+	            return Integer.compare(c2.getContactCount(), c1.getContactCount());
+	        }
+	    });
+
+	    for (Contact contact : contactsList) {
+	        System.out.println(contact);
+	        System.out.println("-------------------");
 	    }
 	}
 	

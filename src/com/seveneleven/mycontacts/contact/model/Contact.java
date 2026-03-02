@@ -14,6 +14,7 @@ public class Contact {
     private LocalDateTime createdAt;
     private boolean deleted = false;
     private Set<String> tags = new HashSet<>();
+    private int contactCount = 0;
 
     public Contact(String name, String phoneNumber, String email) {
         this.contactId = UUID.randomUUID().toString();
@@ -127,5 +128,13 @@ public class Contact {
 
     public Set<String> getTags() {
         return tags;
+    }
+    
+    public int getContactCount() {
+        return contactCount;
+    }
+
+    public void increaseContactCount() {
+        contactCount++;
     }
 }

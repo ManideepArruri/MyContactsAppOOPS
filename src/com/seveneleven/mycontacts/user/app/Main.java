@@ -51,7 +51,10 @@ public class Main {
 			System.out.println("19. Search By Phone");
 			System.out.println("20. Search By Email");
 			System.out.println("21. Search By Tag");
-			System.out.println("22. Exit");
+			System.out.println("22. Filter By Tag");
+			System.out.println("23. Filter By Date Added");
+			System.out.println("24. Filter By Frequently Contacted");
+			System.out.println("25. Exit");
 			System.out.print("Choose option: ");
 
 			int choice = scanner.nextInt();
@@ -285,6 +288,22 @@ public class Main {
 				    contactService.searchByTag(tagSearch);
 				    break;
 				case 22:
+
+				    System.out.print("Enter tag: ");
+				    String filterTag = scanner.nextLine();
+				    contactService.filterByTag(filterTag);
+				    break;
+
+				case 23:
+
+				    contactService.filterByDateAdded();
+				    break;
+
+				case 24:
+
+				    contactService.filterByFrequentlyContacted();
+				    break;
+				case 25:
 					System.out.println("Exiting...");
 					return;
 				default:
