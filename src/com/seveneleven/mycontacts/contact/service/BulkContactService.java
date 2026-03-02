@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.seveneleven.mycontacts.contact.model.Contact;
+import com.seveneleven.mycontacts.contact.model.Tag;
 import com.seveneleven.mycontacts.user.model.User;
 import com.seveneleven.mycontacts.user.service.AuthService;
 
@@ -57,7 +58,7 @@ public class BulkContactService {
     }
 
     //  Bulk Add Tag
-    public void bulkAddTag(List<String> contactIds, String tag) {
+    public void bulkAddTag(List<String> contactIds, Tag tag) {
 
         User user = authService.getLoggedInUser();
         if (user == null) {

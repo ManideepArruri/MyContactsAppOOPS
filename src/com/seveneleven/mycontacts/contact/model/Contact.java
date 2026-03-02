@@ -13,7 +13,7 @@ public class Contact {
     private String email;
     private LocalDateTime createdAt;
     private boolean deleted = false;
-    private Set<String> tags = new HashSet<>();
+    private Set<Tag> tags = new HashSet<>();
     private int contactCount = 0;
 
     public Contact(String name, String phoneNumber, String email) {
@@ -120,13 +120,15 @@ public class Contact {
         this.deleted = deleted;
     }
     
-    public void addTag(String tag) {
-        if (tag != null && !tag.trim().isEmpty()) {
-            tags.add(tag);
-        }
+    public void addTag(Tag tag) {
+        tags.add(tag);
     }
 
-    public Set<String> getTags() {
+    public void removeTag(Tag tag) {
+        tags.remove(tag);
+    }
+
+    public Set<Tag> getTags() {
         return tags;
     }
     

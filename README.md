@@ -26,5 +26,5 @@ For Logged-in User
 For Logged-in User
  User applies multiple filters (by tag, date added, frequently contacted).
 
-
-
+For Logged-in User
+User creates custom tags (Family, Work, Friends) for organizing contacts.

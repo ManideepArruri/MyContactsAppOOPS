@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import com.seveneleven.mycontacts.contact.model.Contact;
+import com.seveneleven.mycontacts.contact.model.Tag;
 import com.seveneleven.mycontacts.user.model.User;
 import com.seveneleven.mycontacts.user.service.AuthService;
 
@@ -413,6 +414,25 @@ public class ContactService {
 	        System.out.println(contact);
 	        System.out.println("-------------------");
 	    }
+	}
+	public void assignTagToContact(String contactId, Tag tag) {
+
+	    User user = authService.getLoggedInUser();
+
+	    if (user == null) {
+	        throw new IllegalStateException("Login required");
+	    }
+
+	    Map<String, Contact> contacts = userContacts.get(user.getEmail());
+
+	    if (contacts == null || !contacts.containsKey(contactId)) {
+	        System.out.println("Contact not found.");
+	        return;
+	    }
+
+	    contacts.get(contactId).addTag(tag);
+
+	    System.out.println("Tag assigned to contact.");
 	}
 	
 }

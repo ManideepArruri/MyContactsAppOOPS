@@ -9,8 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.seveneleven.mycontacts.contact.model.Tag;
 import com.seveneleven.mycontacts.contact.service.BulkContactService;
 import com.seveneleven.mycontacts.contact.service.ContactService;
+import com.seveneleven.mycontacts.contact.service.TagService;
 import com.seveneleven.mycontacts.user.model.User;
 import com.seveneleven.mycontacts.user.service.*;
 
@@ -26,6 +28,7 @@ public class Main {
 		ContactService contactService = new ContactService(authService);
 		BulkContactService bulkService =
 		    new BulkContactService(authService, contactService.getUserContacts());
+		TagService tagService = new TagService(authService);
 
 		while (true) {
 
@@ -54,14 +57,16 @@ public class Main {
 			System.out.println("22. Filter By Tag");
 			System.out.println("23. Filter By Date Added");
 			System.out.println("24. Filter By Frequently Contacted");
-			System.out.println("25. Exit");
+			System.out.println("25. Create Tag");
+			System.out.println("26. View Tags");
+			System.out.println("27. Assign Tag To Contact");
+			System.out.println("28. Exit");
 			System.out.print("Choose option: ");
 
 			int choice = scanner.nextInt();
 			scanner.nextLine();
 
 			try {
-
 				switch (choice) {
 
 				case 1:
@@ -237,8 +242,7 @@ public class Main {
 				    }
 
 				    System.out.print("Enter tag to add: ");
-				    String tag = scanner.nextLine();
-
+				    Tag tag = new Tag("");
 				    bulkService.bulkAddTag(tagIds, tag);
 				    break;
 
@@ -304,6 +308,29 @@ public class Main {
 				    contactService.filterByFrequentlyContacted();
 				    break;
 				case 25:
+
+				    System.out.print("Enter tag name: ");
+				    String newTag = scanner.nextLine();
+				    ((TagService) tagService).createTag(newTag);
+				    break;
+
+				case 26:
+
+				    ((TagService) tagService).viewTags();
+				    break;
+
+				case 27:
+
+				    System.out.print("Enter Contact ID: ");
+				    String contactId1 = scanner.nextLine();
+
+				    System.out.print("Enter Tag name: ");
+				    String tagName = scanner.nextLine();
+
+				    Tag tag1 = new Tag(tagName);
+				    contactService.assignTagToContact(contactId1, tag1);
+				    break;
+				case 28:
 					System.out.println("Exiting...");
 					return;
 				default:
